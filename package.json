@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/NarduSaayman/NS_FlightTracker_DVT/issues"
   },
-  "homepage": "https://github.com/NarduSaayman/NS_FlightTracker_DVT#readme"
+  "homepage": "https://github.com/NarduSaayman/NS_FlightTracker_DVT#readme",
+  "devDependencies": {
+    "snowpack": "^3.8.8"
+  },
+  "dependencies": {
+    "leaflet": "^1.7.1"
+  }
 }
