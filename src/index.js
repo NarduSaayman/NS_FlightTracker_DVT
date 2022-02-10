@@ -2,7 +2,7 @@ import L, { Draggable } from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 var PlaneSolid = L.icon({
-  iconUrl:"./assets/plane-solid.png",
+  iconUrl:"./assets/images/plane-solid.png",
   iconSize: [50,50]
 });
 
