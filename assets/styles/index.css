@@ -1,0 +1,18 @@
+.container{
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+
+#map {
+    height: 100vh;
+    grid-column-start: 2;
+}
+
+#flights_list{
+ overflow-y: scroll;
+ height: 100vh;
+}
+
+.flight-item{
+
+}
