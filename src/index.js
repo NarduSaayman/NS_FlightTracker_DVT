@@ -1,5 +1,6 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "../assets/styles/index.css";
 
 //Leaflet map setup
 var map = L.map('map').setView([0, 0], 3);
@@ -21,7 +22,8 @@ fetch('https://opensky-network.org/api/states/all')
     data = json;
     flights = data.states;
     /*
-    State - 1 = callsign
+    State - 0 = icao24address
+            1 = callsign
             2 = origin_country
             5 = longitude
             6 = latitude
@@ -32,6 +34,7 @@ fetch('https://opensky-network.org/api/states/all')
     //Plot flights
     for (let i = 0; i < 300; i++) {
         var flight = flights[i];
+        var icao24address = flight[0]; // icao24bit
         var callsign = flight[1]; // callsign
         var origin_country = flight[2]; // origin_country
         var longitude = flight[5]; // longitude
@@ -40,7 +43,7 @@ fetch('https://opensky-network.org/api/states/all')
         var true_track = flight[10]; // true_track - plane direction
 
         //If flight is airborne and has coords
-        if (flight != null && on_ground == false && longitude != null && latitude != null) {
+        if (flight != null && on_ground == false && longitude != null && latitude != null && callsign != null) {
             
         L.marker([latitude, longitude], 
             {icon: L.divIcon({
@@ -54,6 +57,18 @@ fetch('https://opensky-network.org/api/states/all')
         }).addTo(map)
         .bindPopup('Flight: ' + callsign + ' - From: ' + origin_country)
         }
+
+        // add a flight element to flights conatiner
+        const flightItem = document.createElement("div");
+        flightItem.className = "flight-item";
+        flightItem.id = icao24address;
+        flightItem.innerHTML = "Flight - " + callsign + "Origin - " ;
+        document.getElementById("flights_list").appendChild(flightItem);
     }
 })
 .catch((err) => console.log(err));
+
+function setView(latitude, logitude)
+{
+
+}
