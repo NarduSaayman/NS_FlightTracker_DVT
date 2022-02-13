@@ -43,7 +43,15 @@ fetch('https://opensky-network.org/api/states/all')
         var true_track = flight[10]; // true_track - plane direction
 
         //If flight is airborne and has coords
-        if (flight != null && on_ground == false && longitude != null && latitude != null && callsign != null) {
+        if (flight != null 
+            && icao24address != null
+            && icao24address != ""
+            && on_ground == false 
+            && longitude != null 
+            && longitude != ""
+            && latitude != null
+            && latitude != "" 
+            && callsign != null) {
             
         L.marker([latitude, longitude], 
             {icon: L.divIcon({
@@ -62,13 +70,15 @@ fetch('https://opensky-network.org/api/states/all')
         const flightItem = document.createElement("div");
         flightItem.className = "flight-item";
         flightItem.id = icao24address;
-        flightItem.innerHTML = "Flight - " + callsign + "Origin - " ;
+        flightItem.innerHTML = "<p>Flight - " + callsign + "</p><p>Origin - " + origin_country + "</p>" ;
         document.getElementById("flights_list").appendChild(flightItem);
+        //setup listener
+        flightItem.addEventListener("click", setView(latitude, longitude));
     }
 })
 .catch((err) => console.log(err));
 
-function setView(latitude, logitude)
+function setView(latitude, longitude)
 {
-
+    map.setView([latitude,longitude], 10);
 }
