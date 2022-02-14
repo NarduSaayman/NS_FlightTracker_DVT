@@ -8,15 +8,10 @@ body {
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 5vh 50vh 45vh;
-    grid-template-areas: 
-    "header"
+    grid-template-rows: 55vh 45vh;
+    grid-template-areas:
     "map"
     "flights-list";
-}
-
-.header {
-    grid-area: header;
 }
 
 .map {
@@ -40,13 +35,30 @@ body {
 
 .flight-item:hover{
     cursor: pointer;
-    background-color: #a7fcc1;
+    background-color: #5c95f8;
 }
 
 @media (min-width: 768px)
 {
     .grid-container
     {
+        grid-template-columns: 30% 70%;
+        grid-template-areas: 
+        "flights-list map"
+        "flights-list map"
+        ;
+    }
+}
+
+@media (min-width: 1099px)
+{
+    .grid-container
+    {
+        grid-template-columns: 20% 80%;
+        grid-template-areas: 
+        "flights-list map"
+        "flights-list map"
+        ;
     }
 }
 
