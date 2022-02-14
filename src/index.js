@@ -45,12 +45,9 @@ fetch('https://opensky-network.org/api/states/all')
         //If flight is airborne and has coords
         if (flight != null 
             && icao24address != null
-            && icao24address != ""
             && on_ground == false 
-            && longitude != null 
-            && longitude != ""
+            && longitude != null
             && latitude != null
-            && latitude != "" 
             && callsign != null) {
             
         L.marker([latitude, longitude], 
