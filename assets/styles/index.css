@@ -1,26 +1,54 @@
 body {
     font-family: sans-serif;
+    margin: 0px;
 }
 
-.container{
-    display: grid;
-    grid-template-columns: 25% 75%;
-}
-
-#map {
+.grid-container{
+    width: 100vw;
     height: 100vh;
-    grid-column-start: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 5vh 50vh 45vh;
+    grid-template-areas: 
+    "header"
+    "map"
+    "flights-list";
 }
 
-#flights_list{
- overflow-y: scroll;
- height: 100vh;
+.header {
+    grid-area: header;
+}
+
+.map {
+    grid-area: map;
+} 
+
+.flights-list{
+    overflow-y: scroll;
+    grid-area: flights-list;
 }
 
 .flight-item{
+    box-shadow: 2px 0 5px #ccc;
+    border: solid 1px #00000024;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 20px;
 }
 
 .flight-item:hover{
     cursor: pointer;
     background-color: #a7fcc1;
 }
+
+@media (min-width: 768px)
+{
+    .grid-container
+    {
+    }
+}
+
+
+

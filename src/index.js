@@ -23,7 +23,12 @@ fetch('https://opensky-network.org/api/states/all')
 .then((response) => response?.json())
 .then((json) => {
     data = json;
-    states = data?.states?.filter(state => !!state[0] && state[8] != false && !!state[5] && !!state[6] && !!state[1]).slice(0,200);
+    states = data?.states?.filter(state => 
+        !!state[0] && 
+        state[8] != true && 
+        !!state[5] && 
+        !!state[6] && 
+        !!state[1]).slice(0,200);
 
     /*
     State - 0 = icao24address
@@ -34,10 +39,6 @@ fetch('https://opensky-network.org/api/states/all')
             8 = on_ground
             10 = true_track
     */
-   
-    // //Plot flights
-    // for (let i = 0; i < 100; i++) {
-    //     var state = states[i];
 
     states.forEach(state => {
         
@@ -51,18 +52,9 @@ fetch('https://opensky-network.org/api/states/all')
             true_track: state[10]
         };
 
-        // //If flight is airborne and has coords
-        // if (state != null 
-        //     && flight.icao24address != null
-        //     && flight.on_ground == false 
-        //     && flight.longitude != null
-        //     && flight.latitude != null
-        //     && flight.callsign != null) {
-
-            
-        //push onto flights array
-            
-            flights.push(flight);
+                  
+        //push onto flights array  
+        flights.push(flight);
         
         //Setup flight marker
         L.marker([flight.latitude, flight.longitude], 
@@ -75,22 +67,17 @@ fetch('https://opensky-network.org/api/states/all')
             })
         
         }).addTo(map)
-        .bindPopup('Flight: ' + flight.callsign + ' - From: ' + flight.origin_country);
+        .bindPopup('<strong>Flight</strong> ' + flight.callsign + ' - <strong>Origin</strong> ' + flight.origin_country);
 
-
-        // add flight item to flights conatiner
+        // Add flight item to flights conatiner
         var flightItem = document.createElement("div");
         flightItem.className = "flight-item";
         flightItem.id = flight.icao24address;
-        flightItem.innerHTML = "<p>Flight - " + flight.callsign + "</p><p>Origin - " + flight.origin_country + "</p>" ;
-        
-
-        // //setup listener
-        // flightItem.addEventListener("click", function(e){setView(flight.latitude, flight.longitude)});
+        flightItem.innerHTML = "<p><strong>Flight</strong> " + flight.callsign + "</p><p><strong>Origin</strong> - " + flight.origin_country + "</p>" ;
         document.getElementById("flights_list").appendChild(flightItem);
-        //}
     });
 
+        //Setup eventListeners
         document.querySelectorAll('.flight-item').forEach(item => {
             const matchedFlight = flights.find(flight => flight.icao24address === item.id);
             if (!!matchedFlight)
@@ -107,5 +94,5 @@ fetch('https://opensky-network.org/api/states/all')
 
 function setView(latitude, longitude)
 {
-    map.setView([latitude,longitude], 10);
+    map.flyTo([latitude,longitude], 8);
 }
