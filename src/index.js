@@ -1,5 +1,6 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "../assets/styles/index.css";
 
 //Leaflet map setup
 var map = L.map('map').setView([0, 0], 3);
@@ -13,47 +14,85 @@ maxZoom: 22
 
 //Get API calls from openskynetwork
 var data;
-var flights;
+var states;
+
+var flights = [];
+
 
 fetch('https://opensky-network.org/api/states/all')
-.then((response) => response.json())
+.then((response) => response?.json())
 .then((json) => {
     data = json;
-    flights = data.states;
+    states = data?.states?.filter(state => 
+        !!state[0] && 
+        state[8] != true && 
+        !!state[5] && 
+        !!state[6] && 
+        !!state[1]).slice(0,200);
+
     /*
-    State - 1 = callsign
+    State - 0 = icao24address
+            1 = callsign
             2 = origin_country
             5 = longitude
             6 = latitude
             8 = on_ground
             10 = true_track
     */
-   
-    //Plot flights
-    for (let i = 0; i < 300; i++) {
-        var flight = flights[i];
-        var callsign = flight[1]; // callsign
-        var origin_country = flight[2]; // origin_country
-        var longitude = flight[5]; // longitude
-        var latitude = flight[6]; // latitude
-        var on_ground = flight[8]; // on_ground
-        var true_track = flight[10]; // true_track - plane direction
 
-        //If flight is airborne and has coords
-        if (flight != null && on_ground == false && longitude != null && latitude != null) {
-            
-        L.marker([latitude, longitude], 
+    states.forEach(state => {
+        
+        const flight = {
+            icao24address: state[0],
+            callsign: state[1],
+            origin_country: state[2],
+            longitude: state[5],
+            latitude: state[6],
+            on_ground: state[8],
+            true_track: state[10]
+        };
+
+                  
+        //push onto flights array  
+        flights.push(flight);
+        
+        //Setup flight marker
+        L.marker([flight.latitude, flight.longitude], 
             {icon: L.divIcon({
                 className: "leaflet-plane-marker",
-                html: L.Util.template('<svg style="filter: invert(57%) sepia(11%) saturate(3678%) hue-rotate(189deg) brightness(98%) contrast(98%); -webkit-transform: rotate('+ true_track +'deg); -moz-transform:rotate('+ true_track +'deg);" version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 97.239 100" enable-background="new 0 0 97.239 100" xml:space="preserve"><path d="M42.732,5.521c0.01-7.396,11.138-7.396,11.151,0.207v30.956l43.355,26.108v11.412L54.091,60.032v23.137l9.953,7.814V100l-15.373-4.741L33.248,100v-9.017l9.9-7.814V60.032L0,74.205V62.792l42.732-26.108V5.521L42.732,5.521z"></path></svg>'),
+                html: L.Util.template('<svg style="filter: invert(57%) sepia(11%) saturate(3678%) hue-rotate(189deg) brightness(98%) contrast(98%); -webkit-transform: rotate('+ flight.true_track +'deg); -moz-transform:rotate('+ flight.true_track +'deg);" version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 97.239 100" enable-background="new 0 0 97.239 100" xml:space="preserve"><path d="M42.732,5.521c0.01-7.396,11.138-7.396,11.151,0.207v30.956l43.355,26.108v11.412L54.091,60.032v23.137l9.953,7.814V100l-15.373-4.741L33.248,100v-9.017l9.9-7.814V60.032L0,74.205V62.792l42.732-26.108V5.521L42.732,5.521z"></path></svg>'),
                 iconAnchor  : [12, 32],
                 iconSize    : [25, 30],
                 popupAnchor : [0, -28]
             })
         
         }).addTo(map)
-        .bindPopup('Flight: ' + callsign + ' - From: ' + origin_country)
-        }
-    }
-})
+        .bindPopup('<strong>Flight</strong> ' + flight.callsign + ' - <strong>Origin</strong> ' + flight.origin_country);
+
+        // Add flight item to flights conatiner
+        var flightItem = document.createElement("div");
+        flightItem.className = "flight-item";
+        flightItem.id = flight.icao24address;
+        flightItem.innerHTML = "<p><strong>Flight</strong> " + flight.callsign + "</p><p><strong>Origin</strong> - " + flight.origin_country + "</p>" ;
+        document.getElementById("flights_list").appendChild(flightItem);
+    });
+
+        //Setup eventListeners
+        document.querySelectorAll('.flight-item').forEach(item => {
+            const matchedFlight = flights.find(flight => flight.icao24address === item.id);
+            if (!!matchedFlight)
+            {
+                item.addEventListener('click', event => {
+                    setView(matchedFlight.latitude, matchedFlight.longitude);
+                })
+            }
+          });
+
+}
+)
 .catch((err) => console.log(err));
+
+function setView(latitude, longitude)
+{
+    map.flyTo([latitude,longitude], 8);
+}
