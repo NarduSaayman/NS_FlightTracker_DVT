@@ -13,8 +13,8 @@ maxZoom: 22
 
 
 //Get API calls from openskynetwork
-const data;
-const states;
+let data;
+let states;
 
 let flights = [];
 
