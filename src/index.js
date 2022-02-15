@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import "../assets/styles/index.css";
 
 //Leaflet map setup
-var map = L.map('map').setView([0, 0], 3);
+let map = L.map('map').setView([0, 0], 3);
 
 L.tileLayer('https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4d525ab52e854ce982f0e8a5b2315989', 
 {attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -13,10 +13,10 @@ maxZoom: 22
 
 
 //Get API calls from openskynetwork
-var data;
-var states;
+const data;
+const states;
 
-var flights = [];
+let flights = [];
 
 
 fetch('https://opensky-network.org/api/states/all')
@@ -70,7 +70,7 @@ fetch('https://opensky-network.org/api/states/all')
         .bindPopup('<strong>Flight</strong> ' + flight.callsign + ' - <strong>Origin</strong> ' + flight.origin_country);
 
         // Add flight item to flights conatiner
-        var flightItem = document.createElement("div");
+        let flightItem = document.createElement("div");
         flightItem.className = "flight-item";
         flightItem.id = flight.icao24address;
         flightItem.innerHTML = "<p><strong>Flight</strong> " + flight.callsign + "</p><p><strong>Origin</strong> - " + flight.origin_country + "</p>" ;
