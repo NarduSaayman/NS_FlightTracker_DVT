@@ -1,0 +1,30 @@
+{
+  "name": "ns_flighttracker_dvt",
+  "version": "1.0.0",
+  "description": "Repo to start on Flight Tracker Assignment and for continuous development of web-dev skills",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NarduSaayman/NS_FlightTracker_DVT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NarduSaayman/NS_FlightTracker_DVT/issues"
+  },
+  "homepage": "https://github.com/NarduSaayman/NS_FlightTracker_DVT#readme",
+  "devDependencies": {
+    "css-loader": "^6.6.0",
+    "snowpack": "^3.8.8",
+    "style-loader": "^3.3.1"
+  },
+  "dependencies": {
+    "leaflet": "^1.7.1"
+  }
+}
