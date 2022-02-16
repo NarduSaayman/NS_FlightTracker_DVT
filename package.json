@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "snowpack dev",
-    "build": "snowpack build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,8 @@
   "homepage": "https://github.com/NarduSaayman/NS_FlightTracker_DVT#readme",
   "devDependencies": {
     "css-loader": "^6.6.0",
-    "snowpack": "^3.8.8",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "vite": "^2.8.2"
   },
   "dependencies": {
     "leaflet": "^1.7.1"
