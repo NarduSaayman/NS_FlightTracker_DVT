@@ -2,73 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer utilities{
-body {
-        font-family: sans-serif;
-        margin: 0px;
+@layer utilities {
+  body {
+    font-family: sans-serif;
+    margin: 0px;
+  }
+
+  .grid-container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 55vh 45vh;
+    grid-template-areas:
+      "map"
+      "flights-list";
+  }
+
+  .map {
+    grid-area: map;
+  }
+
+  .flights-list {
+    overflow-y: scroll;
+    grid-area: flights-list;
+  }
+
+  .flight-item {
+    box-shadow: 2px 0 5px #ccc;
+    border: solid 1px #00000024;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 20px;
+  }
+
+  .flight-item:hover {
+    cursor: pointer;
+    background-color: #5c95f8;
+  }
+
+  @media (min-width: 768px) {
+    .grid-container {
+      grid-template-columns: 30% 70%;
+      grid-template-areas:
+        "flights-list map"
+        "flights-list map";
     }
-    
-    .grid-container{
-        width: 100vw;
-        height: 100vh;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 55vh 45vh;
-        grid-template-areas:
-        "map"
-        "flights-list";
+  }
+
+  @media (min-width: 1099px) {
+    .grid-container {
+      grid-template-columns: 20% 80%;
+      grid-template-areas:
+        "flights-list map"
+        "flights-list map";
     }
-    
-    .map {
-        grid-area: map;
-    } 
-    
-    .flights-list{
-        overflow-y: scroll;
-        grid-area: flights-list;
-    }
-    
-    .flight-item{
-        box-shadow: 2px 0 5px #ccc;
-        border: solid 1px #00000024;
-        border-radius: 10px;
-        margin-top: 5px;
-        margin-left: 5px;
-        margin-right: 5px;
-        padding: 5px 20px;
-    }
-    
-    .flight-item:hover{
-        cursor: pointer;
-        background-color: #5c95f8;
-    }
-    
-    @media (min-width: 768px)
-    {
-        .grid-container
-        {
-            grid-template-columns: 30% 70%;
-            grid-template-areas: 
-            "flights-list map"
-            "flights-list map"
-            ;
-        }
-    }
-    
-    @media (min-width: 1099px)
-    {
-        .grid-container
-        {
-            grid-template-columns: 20% 80%;
-            grid-template-areas: 
-            "flights-list map"
-            "flights-list map"
-            ;
-        }
-    }
-    
-    
-    
-    
-}    
- */
+  }
+}
