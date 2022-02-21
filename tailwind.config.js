@@ -10,7 +10,10 @@ module.exports = {
       },
       gridTemplateColumns: {
         large: `400px 1fr`,
-      }
+      },
+      transitionProperty: {
+        'width': `width`
+      },
     },
   },
   plugins: [],
