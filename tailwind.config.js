@@ -1,7 +1,11 @@
 module.exports = {
-  content: [`./main.js`],
+  content: [`./*.{html,js}`],
   theme: {
-    extend: {},
+    extend: {
+      height:{
+        'map-half': `55vh`,
+      }
+    },
   },
   plugins: [],
 };
