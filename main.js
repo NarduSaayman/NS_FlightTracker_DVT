@@ -76,14 +76,16 @@ fetch(`https://opensky-network.org/api/states/all`)
       const flightItem = document.createElement(`div`);
       flightItem.className = 
       `
-      flight-item transition p-2 m-4 bg-slate-500
-      overflow-y-scroll
+      flight-item transition p-4 mb-4 mt-6 bg-slate-500
       hover:bg-slate-400 hover:cursor-pointer
       border-solid border-1 rounded-md
       drop-shadow-lg
+      overflow-visible
       `;
       flightItem.id = flight.icao24address;
-      flightItem.innerHTML = `<p><strong>Flight</strong> ${flight.callsign}</p><p><strong>Origin</strong> - ${flight.origin_country}</p>`;
+      flightItem.innerHTML = `
+      <div class="flight-item-header rounded-md bg-slate-500 p-1 text-center -mt-7 w-[50%] drop-shadow-md"><strong>Flight</strong> ${flight.callsign}</div>
+      <div class="pt-2"><strong>Origin</strong> - ${flight.origin_country}</div>`;
       document.getElementById(`flights_list`).appendChild(flightItem);
     });
 
