@@ -1,6 +1,6 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import "./assets/styles/index.css";
+import "./assets/styles/index.scss";
 
 // Leaflet map setup
 const map = L.map(`map`).setView([0, 0], 3);
@@ -74,7 +74,14 @@ fetch(`https://opensky-network.org/api/states/all`)
 
       // Add flight item to flights list
       const flightItem = document.createElement(`div`);
-      flightItem.className = `flight-item`;
+      flightItem.className = 
+      `
+      flight-item transition p-2 m-4 bg-slate-500
+      overflow-y-scroll
+      hover:bg-slate-400 hover:cursor-pointer
+      border-solid border-1 rounded-md
+      drop-shadow-lg
+      `;
       flightItem.id = flight.icao24address;
       flightItem.innerHTML = `<p><strong>Flight</strong> ${flight.callsign}</p><p><strong>Origin</strong> - ${flight.origin_country}</p>`;
       document.getElementById(`flights_list`).appendChild(flightItem);
