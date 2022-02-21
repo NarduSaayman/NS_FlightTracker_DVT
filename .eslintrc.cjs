@@ -1,8 +1,8 @@
 module.exports = {
   root: true,
-  extends: ["eslint:recommended", "prettier"],
+  extends: [`eslint:recommended`, `prettier`],
   parserOptions: {
-    sourceType: "module",
+    sourceType: `module`,
     ecmaVersion: 2020,
   },
   env: {
@@ -10,4 +10,8 @@ module.exports = {
     es6: true,
     node: true,
   },
+  rules:{
+    "quotes": [`error`,`backtick`],
+    
+  }
 };
