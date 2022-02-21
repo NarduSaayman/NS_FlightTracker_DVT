@@ -8,10 +8,16 @@
   </head>
 
   <body>
-    <div class="grid-container flex">
-      <div class="map h-map-half z-0" id="map"></div>
-      <div class="flights-container bg-slate-700 -mt-11 overflow-hidden rounded-t-xl drop-shadow-md" id="flights_container">
-        <div class="flights-list h-[50vh] overflow-y-scroll" id="flights_list"></div>
+    <div class="grid-container grid grid-rows-2 lg:grid-cols-large">
+      <div class="map h-map-half z-0
+      lg:order-2 lg:h-screen
+      " id="map"></div>
+      <div class="flights-container bg-slate-800 -mt-11 overflow-hidden rounded-t-xl drop-shadow-md
+      lg:order-1 lg:mt-0 lg:-mr-2 lg:rounded-none lg:rounded-r-xl lg:grid-cols-3
+      " id="flights_container">
+        <div class="flights-list h-[50vh] overflow-y-scroll
+        lg:h-screen
+        " id="flights_list"></div>
       </div>
     </div>
 

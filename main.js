@@ -76,7 +76,7 @@ fetch(`https://opensky-network.org/api/states/all`)
       const flightItem = document.createElement(`div`);
       flightItem.className = 
       `
-      flight-item transition p-4 mb-4 mt-6 bg-slate-500
+      flight-item transition p-4 mb-4 mt-6 bg-slate-600
       hover:bg-slate-400 hover:cursor-pointer
       border-solid border-1 rounded-md
       drop-shadow-lg
