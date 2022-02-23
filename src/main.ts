@@ -9,7 +9,6 @@ L.tileLayer(
   `https://{s}.tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4d525ab52e854ce982f0e8a5b2315989`,
   {
     attribution: `&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors`,
-    apikey: `4d525ab52e854ce982f0e8a5b2315989`,
     maxZoom: 22,
   }
 ).addTo(map);
