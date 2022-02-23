@@ -15,5 +15,5 @@
       "noImplicitReturns": true
     },
     "include": ["src"],
-    "exclude": ["postcss.config.js"]
+    "exclude": ["node_modules"]
   }
