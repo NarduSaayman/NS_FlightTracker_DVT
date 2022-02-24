@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DVT Flight Tracker</title>
-</head>
+  </head>
 
-<body>
-    <div class="grid-container">
-        <div class="map" id="map"></div>
-        <div class="flights-list" id="flights_list"></div>
+  <body>
+    <div class="grid-container grid grid-rows-2 lg:grid-rows-none lg:grid-cols-large">
+      <div class="map h-map-half z-0
+      lg:order-2 lg:h-screen bg-jawgdark-500
+      " id="map"></div>
+      <div class="flights-container bg-jawgdark-continent -mt-11 overflow-hidden rounded-t-xl drop-shadow-md shadow-white-glow
+      lg:order-1 lg:mt-0 lg:-mr-2 lg:rounded-none lg:rounded-r-xl lg:grid-cols-3 lg:px-3 lg:overflow-x-visible lg:overflow-y-scroll" 
+      id="flights_container">
+        <div class="flights-list h-[50vh]
+        lg:h-screen lg:overflow-visible
+         overflow-y-scroll
+        " id="flights_list"></div>
+      </div>
     </div>
 
-    <script type="module" src="src/index.js"></script>
-
-</body>
-
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
