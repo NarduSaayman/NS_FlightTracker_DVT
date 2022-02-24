@@ -10,4 +10,7 @@ export interface Flight{
     latitude: number,
     on_ground: boolean,
     true_track: number,   
+    velocity: number,
+    altitude: number,
+    climb: number
 }

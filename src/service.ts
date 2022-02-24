@@ -15,7 +15,7 @@ import { JsonRes } from "./model/State";
     */
 
 export function fetchFlights(): Observable<Flight[]> {
-  return timer(0, 10000).pipe(switchMap(() =>
+  return timer(0, 100000).pipe(switchMap(() =>
     fetch(`https://opensky-network.org/api/states/all`)
       .then((response) => {
         if (!response.ok) {
@@ -32,7 +32,10 @@ export function fetchFlights(): Observable<Flight[]> {
                 state[8] === false &&
                 !!state[5] &&
                 !!state[6] &&
-                !!state[1]
+                !!state[1] &&
+                !!state[13] &&
+                !!state[9] &&
+                !!state[11]
             )
             .slice(0, 500) || [];
 
@@ -46,6 +49,9 @@ export function fetchFlights(): Observable<Flight[]> {
               latitude: state[6] as number,
               on_ground: state[8] as boolean,
               true_track: state[10] as number,
+              velocity: (((state[9] as number)*3600)/1000), // convert to km/h
+              altitude: state[13] as number,
+              climb: state[11] as number,
             } as Flight)
         );
       })
