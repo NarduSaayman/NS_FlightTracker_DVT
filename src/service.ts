@@ -1,9 +1,10 @@
+import { from, interval, Observable, retry, retryWhen, switchMap, timer } from "rxjs";
 import { Flight } from "./model/Flight";
-import { State } from "./model/State";
+import { JsonRes } from "./model/State";
 
 // Get API calls from openskynetwork
 
-    /*
+/*
     State - 0 = icao24address
             1 = callsign
             2 = origin_country
@@ -13,44 +14,46 @@ import { State } from "./model/State";
             10 = true_track
     */
 
-export function fetchFlights(): Flight[]{
-    
-    const flights: Flight[] = [];
-
+export function fetchFlights(): Observable<Flight[]> {
+  return timer(0, 15000).pipe(switchMap(() =>
     fetch(`https://opensky-network.org/api/states/all`)
-      .then((response) => response?.json())
-      .then((data: State) => {
-        const states = data?.states
-          ?.filter(
-            (state) =>
-              !!state[0] &&
-              state[8] === false &&
-              !!state[5] &&
-              !!state[6] &&
-              !!state[1]
-          )
-          .slice(0, 200);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json() as Promise<JsonRes>;
+      })
+      .then((data: JsonRes) => {
+        const states =
+          data?.states
+            ?.filter(
+              (state) =>
+                !!state[0] &&
+                state[8] === false &&
+                !!state[5] &&
+                !!state[6] &&
+                !!state[1]
+            )
+            .slice(0, 200) || [];
 
-        states?.map((state) => {
-          const flight = ({
-            icao24address: state[0],
-            callsign: state[1],
-            origin_country: state[2],
-            longitude: state[5],
-            latitude: state[6],
-            on_ground: state[8],
-            true_track: state[10],
-          } as Flight)
-
-
-          // push onto flights array
-          flights.push(flight);
-
-        });
-
-        return flights;
-
-      }).catch((err) => console.error(err));
-
-      return flights;
+        return states.map(
+          (state) =>
+            ({
+              icao24address: state[0] as string,
+              callsign: state[1] as string,
+              origin_country: state[2] as string,
+              longitude: state[5] as number,
+              latitude: state[6] as number,
+              on_ground: state[8] as boolean,
+              true_track: state[10] as number,
+            } as Flight)
+        );
+      })
+      .catch((err) => {  
+        console.error(err)
+        throw new Error(err.toString());
+    })
+  ),
+  retry(1) // retry once
+  ); // end pipe
 }
