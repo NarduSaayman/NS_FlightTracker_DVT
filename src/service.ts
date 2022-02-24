@@ -1,6 +1,18 @@
 import { Flight } from "./model/Flight";
 import { State } from "./model/State";
 
+// Get API calls from openskynetwork
+
+    /*
+    State - 0 = icao24address
+            1 = callsign
+            2 = origin_country
+            5 = longitude
+            6 = latitude
+            8 = on_ground
+            10 = true_track
+    */
+
 export function fetchFlights(): Flight[]{
     
     const flights: Flight[] = [];
