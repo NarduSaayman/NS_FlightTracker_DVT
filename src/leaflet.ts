@@ -1,7 +1,6 @@
-import L, { marker } from "leaflet"
+import L from "leaflet"
 import "leaflet/dist/leaflet.css";
 import "../assets/styles/index.scss";
-import { fromEvent, Subject, takeUntil } from "rxjs";
 import { Flight } from "./model/Flight";
 
 const markers: L.Marker[] = [];
@@ -47,7 +46,7 @@ export function renderMap(flights: Flight[]){
         })
           .addTo(leafletMap)
           .bindPopup(
-            `<strong>Flight</strong> ${flight.callsign} - <strong>Origin</strong> ${flight.origin_country}`
+            `<strong>Flight</strong> ${flight.callsign} | <strong>Origin</strong> ${flight.origin_country}`
           );
 
         markers.push(marker);

@@ -1,4 +1,4 @@
-import { from, interval, Observable, retry, retryWhen, switchMap, timer } from "rxjs";
+import { Observable, retry, switchMap, timer } from "rxjs";
 import { Flight } from "./model/Flight";
 import { JsonRes } from "./model/State";
 
@@ -15,7 +15,7 @@ import { JsonRes } from "./model/State";
     */
 
 export function fetchFlights(): Observable<Flight[]> {
-  return timer(0, 100000).pipe(switchMap(() =>
+  return timer(0, 15000).pipe(switchMap(() =>
     fetch(`https://opensky-network.org/api/states/all`)
       .then((response) => {
         if (!response.ok) {
