@@ -15,7 +15,7 @@ import { JsonRes } from "./model/State";
     */
 
 export function fetchFlights(): Observable<Flight[]> {
-  return timer(0, 15000).pipe(switchMap(() =>
+  return timer(0, 10000).pipe(switchMap(() =>
     fetch(`https://opensky-network.org/api/states/all`)
       .then((response) => {
         if (!response.ok) {
@@ -34,7 +34,7 @@ export function fetchFlights(): Observable<Flight[]> {
                 !!state[6] &&
                 !!state[1]
             )
-            .slice(0, 200) || [];
+            .slice(0, 500) || [];
 
         return states.map(
           (state) =>
