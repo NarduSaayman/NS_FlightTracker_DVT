@@ -1,28 +1,27 @@
 import "leaflet/dist/leaflet.css";
-import { interval, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import "../assets/styles/index.scss";
-import { renderMap } from "./Leaflet";
+import { listFlights } from "./domManipulation";
+import { getMap, renderMap } from "./Leaflet";
 import { Flight } from "./model/Flight";
 import { fetchFlights } from "./service"
+import { storeFlights, webStorageFlights$ } from "./webstorage";
 
-      const apiFlights$ = fetchFlights();
-      // const webStorageFlights$ = 
-      const flightState$ = new Subject<Flight[]>()
+const apiFlights$ = fetchFlights();
+const flightState$ = new Subject<Flight[]>()
 
-      flightState$.subscribe((flights) => {
-        renderMap(flights);
-        // listFlights(flights);
-        // storeFlights(flgihts)
+flightState$.subscribe((flights) => {
+  renderMap(flights);
+  listFlights(flights,getMap());
+  storeFlights(flights)
+});
 
-      });
+webStorageFlights$.subscribe((flights) =>{
+  if (flights.length === 0) {
+    flightState$.next(flights)
+  }
+})
 
-      // if getStoredFlights() length 0
-      // call fetchFlights()
-
-      apiFlights$.subscribe((flights) => {
-        flightState$.next(flights)
-      });
-
-      // webStorageFlights$.subscribe((flights) => {
-      //   flightState$.next(flights)
-      // });
+apiFlights$.subscribe((flights) => {
+  flightState$.next(flights)
+});
