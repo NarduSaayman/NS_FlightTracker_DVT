@@ -5,30 +5,9 @@ import { Flight } from "./model/Flight";
 import { State } from "./model/State";
 import { fetchFlights } from "./service"
 
-// Leaflet map setup
-const map = L.map(`map`).setView([0, 0], 3);
-
-L.tileLayer(
-  `https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token=oU2G7Jcu16TVkU41lY2b9OYNvr12IhqiK1SPVkM349tunMkQkA3eSR1CCUPiyEIn`,
-  {
-    attribution: `&copy; <a href="https://www.jawg.io/">JAWG</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors`,
-    maxZoom: 22,
-  }
-).addTo(map);
-
-// Get API calls from openskynetwork
-
-/*
-    State - 0 = icao24address
-            1 = callsign
-            2 = origin_country
-            5 = longitude
-            6 = latitude
-            8 = on_ground
-            10 = true_track
-    */
-
       const flights = fetchFlights();
+
+      console.log(flights);
 
       flights.forEach(flight => {
         // Setup flight marker
