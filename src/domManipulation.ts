@@ -28,7 +28,18 @@ export function listFlights(flights: Flight[], leafletMap: L.Map) {
 
     flightItem.id = flight.icao24address;
     flightItem.innerHTML = `
-        <div class="flight-item-header hover:shadow-none shadow-white-glow text-black rounded-md bg-jawgdark-50 p-2 text-center -mt-7 w-[50%] drop-shadow-md">
+        <div class="
+            flight-item-header 
+            hover:shadow-none 
+            shadow-white-glow 
+            text-black 
+            rounded-md
+            bg-jawgdark-50 
+            p-2
+            text-center 
+            -mt-7 w-[50%] 
+            drop-shadow-md
+        ">
             <strong>Flight</strong> - ${flight.callsign}
         </div>
         <div class="p-2 text-jawgdark-50 text-center ">

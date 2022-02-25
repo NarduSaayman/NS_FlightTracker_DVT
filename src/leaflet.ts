@@ -31,7 +31,8 @@ export function renderMap(flights: Flight[]){
           icon: L.divIcon({
             className: `leaflet-plane-marker`,
             html: L.Util.template(
-              `<svg style="filter: invert(100%) sepia(0%) saturate(7478%) hue-rotate(227deg) brightness(109%) contrast(100%); 
+              `<svg style="
+                filter: invert(100%) sepia(0%) saturate(7478%) hue-rotate(227deg) brightness(109%) contrast(100%); 
                 stroke: #e6e5e5; 
                 stroke-width: 5px; 
                 -webkit-transform: rotate({Heading}deg); 
